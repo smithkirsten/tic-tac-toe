@@ -8,7 +8,7 @@ class Player {
     increaseWin() {
         this.wins++
     }
-    takeTurn() {
-
+    takeTurn(game, position) {
+        game.board[position].replace(this.token);
     }
 }

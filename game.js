@@ -1,26 +1,51 @@
 class Game {
-    constructor() {
-       this.board; //keeps track of moves made  
-       this.player1 = new Player(*);
-       this.player2 = new Player(!);
-       this.turn; //player 1 or player 2
+    constructor(player1, player2, turn) {
+       this.board = [0, 1, 2, 3, 4, 5, 6, 7, 8]; //keeps track of moves made  
+       this.player1 = player1;
+       this.player2 = player2;
+       this.turn = turn;
     }
-    updateBoard() {
-        //adds player's move to the board
-    }
-    switchTurn() {
-        if(this.turn === 'player1') {
-            this.turn = 'player2';
+    updateBoard(position) { //adds player's move to the board
+        //event.target 
+        if(this.turn === 1) {
+            this.board[position] = '*';
+            return 'player1';
         } else {
-            this.turn = 'player1';
+            this.board[position] = '!';
+            return 'player2';
         }
     }
-    checkForWin() {
-        //compares this.board array to win conditions array for a match
-        //return player1 or player2 or draw
-        //do after every turn
+    switchTurn() {
+        if(this.turn === 1) {
+            this.turn = 2;
+        } else {
+            this.turn = 1;
+        }
+    }
+    checkForWin(player, checklist) {
+        var positions = [];
+        var possibleWin = []; //dont actually need this. can iterate through wins array
+        for(var i = 0; i < this.board.length; i++) {
+            if(this.board[i] === this[player].token) {
+                positions.push(i);
+            }
+        }
+        for(i = 0; i < checklist.length; i++) {
+            possibleWin = checklist[i];
+            if(positions.includes(possibleWin[0]) && positions.includes(possibleWin[1]) && positions.includes(possibleWin[2])) {
+                return player;
+            }
+        }
+        for(i = 0; i < this.board.length; i++) {
+            if(this.board[i] !== NaN) { 
+                console.log("no winner!")
+                return;
+            }
+                return 'draw';
+        }
     }
     reset() {
-      //remove all pieces from board  
+      this.board = [];
+      //randomize which player goes first? 
     }
 }
