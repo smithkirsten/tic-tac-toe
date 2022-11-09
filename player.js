@@ -1,10 +1,14 @@
 class Player {
-    constructor() {
-        this.id;
-        this.token;
+    constructor(token) {
+        this.id; //randomize number
+        this.token = token;
         this.wins = 0;
+        this.turn;
     }
-    increaseWin(){
+    increaseWin() {
         this.wins++
+    }
+    takeTurn() {
+
     }
 }
