@@ -1,14 +1,29 @@
 class Player {
-    constructor(token) {
+    constructor(token, id) {
         this.id; //randomize number
         this.token = token;
         this.wins = 0;
-        this.turn;
+        this.positions = [];
     }
     increaseWin() {
         this.wins++
     }
     takeTurn(game, position) {
         game.board[position].replace(this.token);
+    }
+    updatePosition(position) {
+        this.positions.push(position);
+    }
+    checkForWin(checklist) {
+        var possibleWin = [];
+        for(var i = 0; i < checklist.length; i++) {
+            possibleWin = checklist[i];
+            console.log("Positions: ", this.positions)
+            console.log("Do positions include: ", possibleWin);
+            if(this.positions.includes(possibleWin[0]) && this.positions.includes(possibleWin[1]) && this.positions.includes(possibleWin[2])) {
+                return true;
+            }
+        }
+        return false;
     }
 }

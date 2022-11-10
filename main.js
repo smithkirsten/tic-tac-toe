@@ -1,13 +1,13 @@
 //global variables:
 var winStates = [ //pass into checklist
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
+    ['0', '1', '2'],
+    ['3', '4', '5'],
+    ['6', '7', '8'],
+    ['0', '3', '6'],
+    ['1', '4', '7'],
+    ['2', '5', '8'],
+    ['0', '4', '8'],
+    ['2', '4', '6'],
 ];
 var currentGame;
 var player1;
@@ -18,83 +18,101 @@ var player2;
      //6,7,8]
 
 //querySelectors
-    //start button
+var playButton = document.querySelector('.play-button');
     //reset button
-    //grid
+var grid = document.querySelector('.grid');
+var turnPrompts = document.querySelectorAll('.turn-prompt');
 
 //eventListeners
     //load window
-    //click start
-    //click grid
+playButton.addEventListener('click', function() {
+    flipBanner();
+    startGame();
+    console.log("New Game Board: ", currentGame.board);
+})
+grid.addEventListener('click', function(event) {
+    var availableSquare = currentGame.checkAvailability(event.target.id);
+    if (availableSquare) {
+        playRound(availableSquare);
+    } else {
+        console.log("pick an empty square")
+        //error handling function
+    }
+})
 
 //functions
 
+//function loadPage()
+
+//fired when start game button clicked
+function flipBanner() {
+    console.log("flip banner")
+    playButton.classList.add('hidden');
+    for( var i = 0; i < turnPrompts.length; i++) {
+        turnPrompts[i].classList.remove('hidden');
+    }
+}
 function startGame() {
     var startingTurn = Math.floor(Math.random() * 2)
-    player1 = new Player('*');
-    player2 = new Player('!');
+    player1 = new Player('*', 1);
+    player2 = new Player('!', 2);
     currentGame = new Game (player1, player2, startingTurn + 1);
-    //return currentGame.turn; ?
 }
-//fired when grid square clicked
-function takeTurn(position) {
-    var winner = currentGame.checkForWin(currentGame.updateBoard(position), winStates);
-    if(winner === 'player1') {
-        console.log('player 1 wins!')
-        return 'player 1 wins!'
-    } else if(winner === 'player2') {
-        console.log('player 2 wins!')
-        return 'player 2 wins!'
-    } else if(winner === 'draw') {
-        console.log('draw!')
-        return 'draw!'
+
+function playRound(position) {
+    if(currentGame.turn === 1) {
+        player1.updatePosition(position)
+    } else {
+        player2.updatePosition(position)
     }
-    console.log('switch turn!')
-    currentGame.switchTurn();
+    currentGame.updateBoard(position);
+    displayBoard();
+    checkWinner();
+}
+function checkWinner() { //not curently able to find winner
+    // console.log("Player 1 Positions: ", player1.positions)
+    // console.log("Player 1 Wins? ", player1.checkForWin(winStates))
+    // console.log("Player 2 Positions: ", player2.positions)
+    // console.log("Player 2 Wins? ", player2.checkForWin(winStates))
+    if(player1.checkForWin(winStates)) {
+        console.log("player 1 wins")
+        player1.wins++;
+        console.log("Player 1 Wins: ", player1.wins)
+        //insert inner text into banner
+        //return value?
+    } else if (player2.checkForWin(winStates)) {
+        console.log("player 2 wins")
+        player2.wins++;
+        console.log("Player 2 Wins: ", player2.wins)
+        //insert innerText into banner
+        //return value?
+    } else {
+        currentGame.checkDraw();
+        currentGame.switchTurn(); //put into checkDraw?
+    }
+}
+function displayBoard() {
+    console.log(currentGame.board);
 }
 
-function determineWinner() {
-
-}
 
 
 
 
-
-
-
-
-// startGame();
-// console.log("Turn 1: Player ", currentGame.turn);
-// console.log(takeTurn(0));
-// console.log("board: ", currentGame.board);
-// console.log("Turn 2, Player : ", currentGame.turn);
-// console.log(takeTurn(7));
-// console.log(currentGame.board);
-// console.log("Turn 3, Player: ", currentGame.turn);
-// console.log(takeTurn(1));
-// console.log(currentGame.board);
-// console.log("Turn 4, Player: ", currentGame.turn);
-// console.log(takeTurn(6));
-// console.log(currentGame.board);
-// console.log("Turn 5, Player: ", currentGame.turn);
-// console.log(takeTurn(2));
-// console.log(currentGame.board);
-// console.log("Turn 6, Player: ", currentGame.turn);
-// console.log(takeTurn(4));
-// console.log(currentGame.board);
-// console.log("Turn 7, Player: ", currentGame.turn);
-// console.log(takeTurn(5));
-// console.log(currentGame.board);
-// console.log("Turn 8, Player: ", currentGame.turn);
-// console.log(takeTurn(3));
-// console.log(currentGame.board);
-// console.log("Turn 9, Player: ", currentGame.turn);
-// console.log(takeTurn(8));
-// console.log(currentGame.board);
-// console.log("Turn 10, Player: ", currentGame.turn);
-
-
+// var winner = currentGame.checkForWin(currentGame.updateBoard(position), winStates);
+//     if(winner === 'player1') {
+//         console.log('player 1 wins!')
+//         return 'player 1 wins!'
+//     } else if(winner === 'player2') {
+//         console.log('player 2 wins!')
+//         return 'player 2 wins!'
+//     } else if(winner === 'draw') {
+//         console.log('draw!')
+//         return 'draw!'
+//     }
+//     console.log('switch turn!')
+//     currentGame.switchTurn();
+//     return true;
 
 
 
