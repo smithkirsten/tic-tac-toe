@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <!-- <link href="https://fonts.googleapis.com/css?family=EB+Garamond&display=swap" rel="stylesheet"> -->
+        <!-- add font here -->
         <link rel="stylesheet" href="styles.css">
+        <meta charset="UTF-8">
     </head>
     <body>
         <section class="player-section" id="player1Section">
             <h2 class="player-section">Player 1</h2>
         </section>
         <main class="game">
-            <banner>
-                <button class="play-button">Play Tic Tac Toe!</button>
-                <h1 class="turn-prompt hidden">Display Turn Here</h1>
-                <p class="turn-prompt hidden">click a square to make your move</p>
+            <banner class="turn-prompt banner">
+                <button class="button" id="playButton">Play Tic Tac Toe!</button>
+                <h1 class="turn-prompt hidden" id="turnIndicator">Display Turn Here</h1>
+                <p class="turn-prompt hidden" id="turnInstruction">click a square to make your move</p>
+                <p class="error hidden" id="fullSquareError">Whoops! That square is occupied. Pick an empty square!</p>
             </banner>
-            <section class="grid">
+            <section class="grid" id="gameBoard">
                 <div class="box" id="0"></div>
                 <div class="box" id="1"></div>
                 <div class="box" id="2"></div>

@@ -18,10 +18,12 @@ var player2;
      //6,7,8]
 
 //querySelectors
-var playButton = document.querySelector('.play-button');
+var playButton = document.getElementById('playButton');
     //reset button
-var grid = document.querySelector('.grid');
+var gameBoard = document.getElementById('gameBoard');
+var fullSquareError = document.getElementById('fullSquareError');
 var turnPrompts = document.querySelectorAll('.turn-prompt');
+var boxes = document.querySelectorAll('.box');
 
 //eventListeners
     //load window?
@@ -30,10 +32,11 @@ playButton.addEventListener('click', function() {
     startGame();
     console.log("New Game Board: ", currentGame.board);
 })
-grid.addEventListener('click', function(event) {
+gameBoard.addEventListener('click', function(event) {
     var availableSquare = currentGame.checkAvailability(event.target.id);
     if (availableSquare) {
         playRound(availableSquare);
+        displayBoard();
     } else {
         fullSquareAlert();
         //error handling function
@@ -60,17 +63,20 @@ function startGame() {
 }
 
 function playRound(position) {
+    fullSquareError.classList.add('hidden');
     if(currentGame.turn === 1) {
         player1.updatePosition(position)
     } else {
         player2.updatePosition(position)
     }
     currentGame.updateBoard(position);
-    displayBoard();
     checkWinner();
 }
 function fullSquareAlert() {
     console.log("that square is full! pick an empty square")
+    fullSquareError.classList.remove('hidden');
+
+
 }
 function checkWinner() {
     if(player1.checkForWin(winStates)) {
@@ -91,9 +97,24 @@ function checkWinner() {
     }
 }
 function displayBoard() {
+    //position = index numner/box id
     console.log(currentGame.board);
+    console.log("indv boxes: ", boxes);
+    console.log("boxes[0]: ", boxes[0])
+    for(var i = 0; i < currentGame.board.length; i++) {
+        if(currentGame.board[i] === '*'){
+            console.log("Boxes[i]: ", boxes[i]);
+            boxes[i].innerText = '🌞';
+        }else if (currentGame.board[i] === '!') {
+            boxes[i].innerText = '🌙';
+        } 
+    }  
 }
 
+//how can I target the id of the box html
+    //`<div class="box" id="${i}"></div>`
+    //`<div class="box" id="${i}">🌙</div>`
+    //`<div class="box" id="${i}">🌞</div>`
 
 
 //Game Sequence:
