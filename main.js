@@ -24,7 +24,7 @@ var grid = document.querySelector('.grid');
 var turnPrompts = document.querySelectorAll('.turn-prompt');
 
 //eventListeners
-    //load window
+    //load window?
 playButton.addEventListener('click', function() {
     flipBanner();
     startGame();
@@ -35,7 +35,7 @@ grid.addEventListener('click', function(event) {
     if (availableSquare) {
         playRound(availableSquare);
     } else {
-        console.log("pick an empty square")
+        fullSquareAlert();
         //error handling function
     }
 })
@@ -69,19 +69,22 @@ function playRound(position) {
     displayBoard();
     checkWinner();
 }
+function fullSquareAlert() {
+    console.log("that square is full! pick an empty square")
+}
 function checkWinner() {
     if(player1.checkForWin(winStates)) {
         console.log("player 1 wins")
         player1.wins++;
         console.log("Player 1 Wins: ", player1.wins)
         //insert inner text into banner
-        //return value?
+        //return player to insert into banner as winner?
     } else if (player2.checkForWin(winStates)) {
         console.log("player 2 wins")
         player2.wins++;
         console.log("Player 2 Wins: ", player2.wins)
         //insert innerText into banner
-        //return value?
+        //return player to insert into banner as winner?
     } else {
         currentGame.checkDraw();
         currentGame.switchTurn(); //put into checkDraw?
@@ -101,20 +104,27 @@ function displayBoard() {
     //updateBoard
     //checkForWin
     //switchTurn
-    //prompt turn
 
 
 //DOM sequence
     //load window
         //empty board
         //let's play button in banner
-    //Event: click button (take turn)
-        //flip banner to present whose turn it is
+    //Event: click button (start game)
+        //flip banner to present whose turn it is & instructions to play
     //event: click grid
         //what square was clicked?
         //which player has turn true?
         //insert token (or remove hidden?)in square
         //prompt turn
+
+        //if winner is declared:
+            //display winner in banner
+            //freeze game board (no clicks register)
+            //wins is displayed on player sections
+            //auto re-load after several seconds
+            //reset game board
+    
 
 
 //extras: Let's Play button that 
