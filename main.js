@@ -38,6 +38,7 @@ playButton.addEventListener('click', function() {
     console.log("New Game Board: ", currentGame.board);
 })
 gameBoard.addEventListener('click', function(event) {
+    console.log(event.target)
     var availableSquare = currentGame.checkAvailability(event.target.id);
     if (availableSquare) {
         playRound(availableSquare);
