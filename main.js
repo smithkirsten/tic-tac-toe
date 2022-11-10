@@ -19,14 +19,19 @@ var player2;
 
 //querySelectors
 var playButton = document.getElementById('playButton');
-    //reset button
-var gameBoard = document.getElementById('gameBoard');
-var fullSquareError = document.getElementById('fullSquareError');
 var turnPrompts = document.querySelectorAll('.turn-prompt');
+var fullSquareError = document.getElementById('fullSquareError');
+var winnerDisplay = document.getElementById('winnerDisplay');
+var winner = document.getElementById('winnerDisplay');
+var player1Wins = document.getElementById('player1Wins');
+var player2Wins = document.getElementById('player2Wins');
+
+
+var gameBoard = document.getElementById('gameBoard');
 var boxes = document.querySelectorAll('.box');
 
+
 //eventListeners
-    //load window?
 playButton.addEventListener('click', function() {
     flipBanner();
     startGame();
@@ -61,7 +66,7 @@ function startGame() {
     player2 = new Player('!', 2);
     currentGame = new Game (player1, player2, startingTurn + 1);
 }
-
+//when square clicked
 function playRound(position) {
     fullSquareError.classList.add('hidden');
     if(currentGame.turn === 1) {
@@ -75,26 +80,26 @@ function playRound(position) {
 function fullSquareAlert() {
     console.log("that square is full! pick an empty square")
     fullSquareError.classList.remove('hidden');
-
-
 }
 function checkWinner() {
     if(player1.checkForWin(winStates)) {
         console.log("player 1 wins")
         player1.wins++;
         console.log("Player 1 Wins: ", player1.wins)
-        //insert inner text into banner
-        //return player to insert into banner as winner?
+        callGame(1);
+        return;
     } else if (player2.checkForWin(winStates)) {
         console.log("player 2 wins")
         player2.wins++;
         console.log("Player 2 Wins: ", player2.wins)
-        //insert innerText into banner
-        //return player to insert into banner as winner?
-    } else {
-        currentGame.checkDraw();
-        currentGame.switchTurn(); //put into checkDraw?
+        callGame(2)
+        return;
+    } else if (currentGame.checkDraw()){
+        callGame('draw');
+        console.log('draw');
+        return;
     }
+    currentGame.switchTurn(); //put into checkDraw?
 }
 function displayBoard() {
     //position = index numner/box id
@@ -110,11 +115,43 @@ function displayBoard() {
         } 
     }  
 }
+//when winner declared
+function callGame(winner) {
+    //interpolate HTML in banner
+    //interpolate HTML in sections
+    if(winner === 1) {
+        winnerDisplay.innerText = '🌞The Day Wins!🌞';
+        player1Wins.innerText = `${player1.wins} Wins`;
+    } else if (winner === 2) {
+        winnerDisplay.innerText = '🌙The Night Wins!🌙';
+        player2Wins.innerText = `${player2.wins} Wins`;
+    } else {
+        winnerDisplay.innerText = '🌞It\'s a draw🌙';
+    }
+    displayWinner();
+    disableGrid();
+    resetGameSection();
+}
+function disableGrid() {
+    gameBoard.classList.add('disable');
+}
+function displayWinner() {
+    winnerDisplay.classList.remove('hidden');
+    playButton.classList.add('hidden');
+    for( var i = 0; i < turnPrompts.length; i++) {
+        turnPrompts[i].classList.add('hidden');
+    }
+}
+function resetGameSection() {
+    //hide winner
+    //hide lets play button
+    //unhide turn
+    //unhide instructions
+    //currentGame.reset()
+}
+//wait several seconds and auto-reset game board
+    //can an alert pop up with a count down? and when it disappears the board clears on DOM?
 
-//how can I target the id of the box html
-    //`<div class="box" id="${i}"></div>`
-    //`<div class="box" id="${i}">🌙</div>`
-    //`<div class="box" id="${i}">🌞</div>`
 
 
 //Game Sequence:

@@ -29,11 +29,11 @@ class Game {
         for(var i = 0; i < this.board.length; i++) {
             if(!isNaN(this.board[i])) {  //is NaN a falsey value? yes?
                 console.log("no winner yet!")
-                return;
+                return false;
             }
         }
         console.log("draw!")
-        return 'draw';
+        return true;
     }
     reset() {
       this.board = [];
