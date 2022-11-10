@@ -69,11 +69,7 @@ function playRound(position) {
     displayBoard();
     checkWinner();
 }
-function checkWinner() { //not curently able to find winner
-    // console.log("Player 1 Positions: ", player1.positions)
-    // console.log("Player 1 Wins? ", player1.checkForWin(winStates))
-    // console.log("Player 2 Positions: ", player2.positions)
-    // console.log("Player 2 Wins? ", player2.checkForWin(winStates))
+function checkWinner() {
     if(player1.checkForWin(winStates)) {
         console.log("player 1 wins")
         player1.wins++;
@@ -94,41 +90,6 @@ function checkWinner() { //not curently able to find winner
 function displayBoard() {
     console.log(currentGame.board);
 }
-
-
-
-
-
-// var winner = currentGame.checkForWin(currentGame.updateBoard(position), winStates);
-//     if(winner === 'player1') {
-//         console.log('player 1 wins!')
-//         return 'player 1 wins!'
-//     } else if(winner === 'player2') {
-//         console.log('player 2 wins!')
-//         return 'player 2 wins!'
-//     } else if(winner === 'draw') {
-//         console.log('draw!')
-//         return 'draw!'
-//     }
-//     console.log('switch turn!')
-//     currentGame.switchTurn();
-//     return true;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
