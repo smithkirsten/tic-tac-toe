@@ -1,23 +1,42 @@
 class Game {
-    constructor() {
-       this.board; //keeps track of moves made  
-       this.turn; //player 1 or player 2
+    constructor(player1, player2, turn) {
+       this.board = [0, 1, 2, 3, 4, 5, 6, 7, 8]; 
+       this.player1 = player1;
+       this.player2 = player2;
+       this.turn = turn;
     }
-    updateBoard() {
-        //adds player's move to the boar
+    checkAvailability(position) {
+        if(isNaN(this.board[position])) { 
+            return false;
+        }
+        return position;
     }
-    switchTurn() {
-        if(this.turn === 'player1') {
-            this.turn = 'player2'
+    updateBoard(position) { //adds player's move to the game.board
+        if(this.turn === 1) {
+            this.board[position] = '*';
         } else {
-            this.turn = 'player1'
+            this.board[position] = '!';
         }
     }
-    checkForWin() {
-        //compares this.board array to win conditions array for a match
-        //return player1 or player2 or draw
+    switchTurn() {
+        if(this.turn === 1) {
+            this.turn = 2;
+        } else {
+            this.turn = 1;
+        }
+    }
+    checkDraw() {
+        for(var i = 0; i < this.board.length; i++) {
+            if(!isNaN(this.board[i])) {  //is NaN a falsey value? yes?
+                console.log("no winner yet!")
+                return;
+            }
+        }
+        console.log("draw!")
+        return 'draw';
     }
     reset() {
-        
+      this.board = [];
+      //randomize which player goes first? 
     }
 }
