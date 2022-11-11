@@ -32,9 +32,14 @@ var boxes = document.querySelectorAll('.box');
 
 
 //eventListeners
+window.addEventListener('load', function () {
+    disableGrid();
+    //display welcome banner
+})
 playButton.addEventListener('click', function() {
     startGame();
     flipBanner();
+    enableGrid();
 })
 gameBoard.addEventListener('click', function(event) {
     var availableSquare = currentGame.checkAvailability(event.target.id);
@@ -53,7 +58,6 @@ gameBoard.addEventListener('click', function(event) {
 function flipBanner() {
     playButton.classList.add('hidden');
     fullSquareError.classList.add('hidden');
-
     displayTurn();
 }
 function displayTurn() {
@@ -72,7 +76,51 @@ function startGame() {
     player2 = new Player('!', 2);
     currentGame = new Game (player1, player2, startingTurn + 1);
 }
-//when square clicked
+function displayBoard() {
+    for(var i = 0; i < currentGame.board.length; i++) {
+        if(currentGame.board[i] === '*'){
+            console.log("Boxes[i]: ", boxes[i]);
+            boxes[i].innerText = '🌞';
+        }else if (currentGame.board[i] === '!') {
+            boxes[i].innerText = '🌙';
+        } 
+    }  
+}
+function displayWinner() {
+    winnerDisplay.classList.remove('hidden');
+    playButton.classList.add('hidden');
+    hideTurnPrompts();
+}
+function displayTurnPrompts() {
+    for(var i = 0; i < turnPrompts.length; i++) {
+        turnPrompts[i].classList.remove('hidden');
+    }  
+}
+function hideTurnPrompts() {
+    for(var i = 0; i < turnPrompts.length; i++) {
+        turnPrompts[i].classList.add('hidden');
+    } 
+}
+function fullSquareAlert() {
+    fullSquareError.classList.remove('hidden');
+}
+function disableGrid() {
+    for(var i = 0; i < boxes.length;i++) {
+        boxes[i].disabled = true;
+        boxes[i].classList.add('disabled');
+    } 
+}
+function enableGrid() {
+    for(var i = 0; i < boxes.length;i++) {
+        boxes[i].disabled = false;
+        boxes[i].classList.remove('disabled');
+    } 
+}
+function clearBoardDisplay() {
+    for(var i = 0; i < currentGame.board.length; i++) {
+            boxes[i].innerText = '';
+    }
+}
 function playRound(position) {
     fullSquareError.classList.add('hidden');
     if(currentGame.turn === 1) {
@@ -83,41 +131,22 @@ function playRound(position) {
     currentGame.updateBoard(position);
     checkWinner();
 }
-function fullSquareAlert() {
-    fullSquareError.classList.remove('hidden');
-}
 function checkWinner() {
     if(player1.checkForWin(winStates)) {
         player1.wins++;
-        console.log("Player 1 Wins: ", player1.wins)
         callGame(1);
         return;
     } else if (player2.checkForWin(winStates)) {
-        console.log("player 2 wins")
         player2.wins++;
-        console.log("Player 2 Wins: ", player2.wins)
         callGame(2);
         return;
     } else if (currentGame.checkDraw()){
         callGame('draw');
-        console.log('draw');
         return;
     }
-    currentGame.switchTurn(); //put into checkDraw?
+    currentGame.switchTurn();
     displayTurn();
 }
-function displayBoard() {
-    //position = index numner/box id
-    for(var i = 0; i < currentGame.board.length; i++) {
-        if(currentGame.board[i] === '*'){
-            console.log("Boxes[i]: ", boxes[i]);
-            boxes[i].innerText = '🌞';
-        }else if (currentGame.board[i] === '!') {
-            boxes[i].innerText = '🌙';
-        } 
-    }  
-}
-//when winner declared
 function callGame(winner) {
     if(winner === 1) {
         winnerDisplay.innerText = '🌞The Day Wins!🌞';
@@ -132,36 +161,20 @@ function callGame(winner) {
     disableGrid();
     setTimeout(resetGameSection, 2000);
 }
-function disableGrid() {
-    for(var i = 0; i < boxes.length;i++) {
-        boxes[i].disabled = true;
-    }   
-}
-function displayWinner() {
-    winnerDisplay.classList.remove('hidden');
-    playButton.classList.add('hidden');
-    for( var i = 0; i < turnPrompts.length; i++) {
-        turnPrompts[i].classList.add('hidden');
-    }
-}
 function resetGameSection() {
     winnerDisplay.classList.add('hidden');
     playButton.classList.add('hidden')
     fullSquareError.classList.add('hidden');
-    for(var i = 0; i < turnPrompts.length; i++) {
-        turnPrompts[i].classList.remove('hidden');
-    }
+    displayTurnPrompts();
     currentGame.reset();
     player1.resetPositions();
     player2.resetPositions();
-    for(var i = 0; i < boxes.length; i++) {
-        boxes[i].innerText = '';
-        boxes[i].disabled = false;
-    }
     currentGame.switchTurn();
+    clearBoardDisplay();
+    enableGrid();
 }
-//wait several seconds and auto-reset game board
-    //can an alert pop up with a count down? and when it disappears the board clears on DOM?
+
+
 
 
 

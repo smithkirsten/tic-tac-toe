@@ -1,6 +1,9 @@
 body {
     display: flex;
 }
+button {
+    cursor: pointer;
+}
 .game {
     height: 100vh;
     width: 60vw;
@@ -22,12 +25,11 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     grid-gap: 10px;
-    cursor: pointer;
 }
 .box{
     background-color: aqua;
 }
-.disable {
+.disabled {
     cursor: not-allowed;
     /* turn cursor into icon? */
 }
