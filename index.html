@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <!-- add font here -->
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="styles.css">
         <meta charset="UTF-8">
         <title>Tic Tac Toe</title>
@@ -19,8 +19,10 @@
                 <img class="player-icon sun-moon" src="./assets/21.svg" alt="Sun and Moon Icon">
                 <button class="play-button" id="playButton">Play Tic Tac Toe!</button>
                 <h1 class="winner-display hidden" id="winnerDisplay"></h1>
-                <h2 class="turn-prompt hidden" id="turnIndicator"></h1>
-                <p class="turn-prompt hidden" id="turnInstruction">click a square to make your move</p>
+                <div class="instruction-wrapper">
+                    <h2 class="turn-prompt turn-indicator hidden" id="turnIndicator"></h1>
+                    <p class="turn-prompt play-instruction hidden" id="turnInstruction">click a square to make your move</p>
+                </div>
                 <p class="error hidden" id="fullSquareError">Whoops! That square is occupied. Pick an empty square!</p>
                 </banner>
                 <section class="grid" id="gameBoard">

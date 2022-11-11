@@ -1,9 +1,11 @@
 
 body {
     display: flex;
+    font-family: 'Montserrat', sans-serif;
 }
 button {
     cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
 }
 
 /* player sections */
@@ -52,6 +54,9 @@ button {
     height: 5vh;
     border-radius: 20px;
     background-color: #FFFFFC;
+}
+.turn-indicator {
+    padding: none;
 }
 .game {
     height: 100vh;
