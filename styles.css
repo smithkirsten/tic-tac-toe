@@ -71,7 +71,6 @@ button {
     justify-content: space-around;
     align-items: center;
 }
-
 .grid {
     background-color: #B36A5E;
     height: 60vh;
@@ -84,6 +83,9 @@ button {
 .box{
     background-color: #EEE2DF;
     border: none;
+}
+.game-token {
+    height: 75px;
 }
 .disabled {
     cursor: not-allowed;

@@ -80,9 +80,9 @@ function displayBoard() {
     for(var i = 0; i < currentGame.board.length; i++) {
         if(currentGame.board[i] === '*'){
             console.log("Boxes[i]: ", boxes[i]);
-            boxes[i].innerText = '🌞';
+            boxes[i].innerHTML = '<img class="game-token" src="./assets/23.svg" alt="Sun Token">';
         }else if (currentGame.board[i] === '!') {
-            boxes[i].innerText = '🌙';
+            boxes[i].innerHTML = '<img class="game-token" src="./assets/8.svg" alt="Moon Token">';
         } 
     }  
 }
