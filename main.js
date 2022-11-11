@@ -19,38 +19,53 @@ var player2;
 
 //querySelectors
 var playButton = document.getElementById('playButton');
-    //reset button
-var gameBoard = document.getElementById('gameBoard');
-var fullSquareError = document.getElementById('fullSquareError');
 var turnPrompts = document.querySelectorAll('.turn-prompt');
+var fullSquareError = document.getElementById('fullSquareError');
+var winnerDisplay = document.getElementById('winnerDisplay');
+var winner = document.getElementById('winnerDisplay');
+var player1Wins = document.getElementById('player1Wins');
+var player2Wins = document.getElementById('player2Wins');
+
+
+var gameBoard = document.getElementById('gameBoard');
 var boxes = document.querySelectorAll('.box');
 
+
 //eventListeners
-    //load window?
+window.addEventListener('load', function () {
+    disableGrid();
+    //display welcome banner
+})
 playButton.addEventListener('click', function() {
-    flipBanner();
     startGame();
-    console.log("New Game Board: ", currentGame.board);
+    flipBanner();
+    enableGrid();
 })
 gameBoard.addEventListener('click', function(event) {
     var availableSquare = currentGame.checkAvailability(event.target.id);
+    console.log("check availability on this board: ", currentGame.board);
     if (availableSquare) {
         playRound(availableSquare);
         displayBoard();
     } else {
         fullSquareAlert();
-        //error handling function
     }
 })
 
 //functions
 
-//function loadPage()
-
 //fired when start game button clicked
 function flipBanner() {
-    console.log("flip banner")
     playButton.classList.add('hidden');
+    fullSquareError.classList.add('hidden');
+    displayTurn();
+}
+function displayTurn() {
+    if (currentGame.turn === 1) {
+        turnPrompts[0].innerText = 'Mave your move, Sun!'
+    } else {
+        turnPrompts[0].innerText = 'Make your move, Moon!'
+    }
     for( var i = 0; i < turnPrompts.length; i++) {
         turnPrompts[i].classList.remove('hidden');
     }
@@ -61,7 +76,51 @@ function startGame() {
     player2 = new Player('!', 2);
     currentGame = new Game (player1, player2, startingTurn + 1);
 }
-
+function displayBoard() {
+    for(var i = 0; i < currentGame.board.length; i++) {
+        if(currentGame.board[i] === '*'){
+            console.log("Boxes[i]: ", boxes[i]);
+            boxes[i].innerText = '🌞';
+        }else if (currentGame.board[i] === '!') {
+            boxes[i].innerText = '🌙';
+        } 
+    }  
+}
+function displayWinner() {
+    winnerDisplay.classList.remove('hidden');
+    playButton.classList.add('hidden');
+    hideTurnPrompts();
+}
+function displayTurnPrompts() {
+    for(var i = 0; i < turnPrompts.length; i++) {
+        turnPrompts[i].classList.remove('hidden');
+    }  
+}
+function hideTurnPrompts() {
+    for(var i = 0; i < turnPrompts.length; i++) {
+        turnPrompts[i].classList.add('hidden');
+    } 
+}
+function fullSquareAlert() {
+    fullSquareError.classList.remove('hidden');
+}
+function disableGrid() {
+    for(var i = 0; i < boxes.length;i++) {
+        boxes[i].disabled = true;
+        boxes[i].classList.add('disabled');
+    } 
+}
+function enableGrid() {
+    for(var i = 0; i < boxes.length;i++) {
+        boxes[i].disabled = false;
+        boxes[i].classList.remove('disabled');
+    } 
+}
+function clearBoardDisplay() {
+    for(var i = 0; i < currentGame.board.length; i++) {
+            boxes[i].innerText = '';
+    }
+}
 function playRound(position) {
     fullSquareError.classList.add('hidden');
     if(currentGame.turn === 1) {
@@ -72,49 +131,56 @@ function playRound(position) {
     currentGame.updateBoard(position);
     checkWinner();
 }
-function fullSquareAlert() {
-    console.log("that square is full! pick an empty square")
-    fullSquareError.classList.remove('hidden');
-
-
-}
 function checkWinner() {
     if(player1.checkForWin(winStates)) {
-        console.log("player 1 wins")
         player1.wins++;
-        console.log("Player 1 Wins: ", player1.wins)
-        //insert inner text into banner
-        //return player to insert into banner as winner?
+        callGame(1);
+        return;
     } else if (player2.checkForWin(winStates)) {
-        console.log("player 2 wins")
         player2.wins++;
-        console.log("Player 2 Wins: ", player2.wins)
-        //insert innerText into banner
-        //return player to insert into banner as winner?
-    } else {
-        currentGame.checkDraw();
-        currentGame.switchTurn(); //put into checkDraw?
+        callGame(2);
+        return;
+    } else if (currentGame.checkDraw()){
+        callGame('draw');
+        return;
     }
+    currentGame.switchTurn();
+    displayTurn();
 }
-function displayBoard() {
-    //position = index numner/box id
-    console.log(currentGame.board);
-    console.log("indv boxes: ", boxes);
-    console.log("boxes[0]: ", boxes[0])
-    for(var i = 0; i < currentGame.board.length; i++) {
-        if(currentGame.board[i] === '*'){
-            console.log("Boxes[i]: ", boxes[i]);
-            boxes[i].innerText = '🌞';
-        }else if (currentGame.board[i] === '!') {
-            boxes[i].innerText = '🌙';
-        } 
-    }  
+function callGame(winner) {
+    if(winner === 1) {
+        winnerDisplay.innerText = '🌞The Day Wins!🌞';
+        player1Wins.innerText = `${player1.wins} Wins`;
+    } else if (winner === 2) {
+        winnerDisplay.innerText = '🌙The Night Wins!🌙';
+        player2Wins.innerText = `${player2.wins} Wins`;
+    } else {
+        winnerDisplay.innerText = '🌞It\'s a draw🌙';
+    }
+    displayWinner();
+    disableGrid();
+    setTimeout(resetGameSection, 2000);
+}
+function resetGameSection() {
+    winnerDisplay.classList.add('hidden');
+    playButton.classList.add('hidden')
+    fullSquareError.classList.add('hidden');
+    displayTurnPrompts();
+    currentGame.reset();
+    player1.resetPositions();
+    player2.resetPositions();
+    currentGame.switchTurn();
+    clearBoardDisplay();
+    enableGrid();
 }
 
-//how can I target the id of the box html
-    //`<div class="box" id="${i}"></div>`
-    //`<div class="box" id="${i}">🌙</div>`
-    //`<div class="box" id="${i}">🌞</div>`
+
+
+
+
+
+
+
 
 
 //Game Sequence:

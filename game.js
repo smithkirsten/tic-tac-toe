@@ -11,11 +11,11 @@ class Game {
         }
         return position;
     }
-    updateBoard(position) { //adds player's move to the game.board
+    updateBoard(position) {
         if(this.turn === 1) {
-            this.board[position] = '*';
+            this.board[position] = '*'; //player1.token
         } else {
-            this.board[position] = '!';
+            this.board[position] = '!'; //player2.token
         }
     }
     switchTurn() {
@@ -27,16 +27,16 @@ class Game {
     }
     checkDraw() {
         for(var i = 0; i < this.board.length; i++) {
-            if(!isNaN(this.board[i])) {  //is NaN a falsey value? yes?
+            if(!isNaN(this.board[i])) {
                 console.log("no winner yet!")
-                return;
+                return false;
             }
         }
         console.log("draw!")
-        return 'draw';
+        return true;
     }
     reset() {
-      this.board = [];
+      this.board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
       //randomize which player goes first? 
     }
 }
