@@ -134,7 +134,9 @@ function callGame(winner) {
     resetGameSection();
 }
 function disableGrid() {
-    gameBoard.classList.add('disable');
+    for(var i = 0; i < boxes.length;i++) {
+        boxes[i].disabled = true;
+    }   
 }
 function displayWinner() {
     winnerDisplay.classList.remove('hidden');
@@ -149,6 +151,7 @@ function resetGameSection() {
     //unhide turn
     //unhide instructions
     //currentGame.reset()
+    //undisable board
 }
 //wait several seconds and auto-reset game board
     //can an alert pop up with a count down? and when it disappears the board clears on DOM?
