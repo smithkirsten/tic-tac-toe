@@ -1,33 +1,80 @@
+
 body {
     display: flex;
 }
 button {
     cursor: pointer;
 }
-.game {
+
+/* player sections */
+.player-section {
     height: 100vh;
-    width: 60vw;
+    width: 20vw;
+    background-color: #B45C;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.player-icon {
+    margin: 3vh;
+    height: 28vh;
+
+}
+.wins-container {
+    background-color: #FFFFFC;
+    margin-top: 7vh;
+    height: 18vh;
+    width: 18vw;
+    border-radius: 66px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.player-section {
-    height: 100vh;
-    width: 20vw;
-    background-color: brown;
-}
-.grid {
-    background-color: antiquewhite;
-    height: 60vh;
+
+
+/* game section */
+.main-banner {
     width: 95%;
+    height: 30vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.sun-moon {
+    height: 20vh;
+}
+.play-button {
+    border: none;
+    width: 15vw;
+    height: 5vh;
+    border-radius: 20px;
+    background-color: #FFFFFC;
+}
+.game {
+    height: 100vh;
+    width: 60vw;
+    background-color: #C89F;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.grid {
+    background-color: #B36A5E;
+    height: 60vh;
+    width: 60%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     grid-gap: 10px;
 }
 .box{
-    background-color: aqua;
+    background-color: #EEE2DF;
+    border: none;
 }
 .disabled {
     cursor: not-allowed;
