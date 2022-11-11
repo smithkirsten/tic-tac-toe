@@ -33,8 +33,8 @@ var boxes = document.querySelectorAll('.box');
 
 //eventListeners
 playButton.addEventListener('click', function() {
-    flipBanner();
     startGame();
+    flipBanner();
 })
 gameBoard.addEventListener('click', function(event) {
     var availableSquare = currentGame.checkAvailability(event.target.id);
@@ -53,6 +53,15 @@ gameBoard.addEventListener('click', function(event) {
 function flipBanner() {
     playButton.classList.add('hidden');
     fullSquareError.classList.add('hidden');
+
+    displayTurn();
+}
+function displayTurn() {
+    if (currentGame.turn === 1) {
+        turnPrompts[0].innerText = 'Mave your move, Sun!'
+    } else {
+        turnPrompts[0].innerText = 'Make your move, Moon!'
+    }
     for( var i = 0; i < turnPrompts.length; i++) {
         turnPrompts[i].classList.remove('hidden');
     }
@@ -95,6 +104,7 @@ function checkWinner() {
         return;
     }
     currentGame.switchTurn(); //put into checkDraw?
+    displayTurn();
 }
 function displayBoard() {
     //position = index numner/box id
