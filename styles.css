@@ -56,7 +56,11 @@ button {
     background-color: #FFFFFC;
 }
 .turn-indicator {
-    padding: none;
+    font-size: 36px;
+    font-weight:bolder;
+}
+.play-instruction {
+    text-align: center;
 }
 .game {
     height: 100vh;
