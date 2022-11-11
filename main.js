@@ -35,28 +35,24 @@ var boxes = document.querySelectorAll('.box');
 playButton.addEventListener('click', function() {
     flipBanner();
     startGame();
-    console.log("New Game Board: ", currentGame.board);
 })
 gameBoard.addEventListener('click', function(event) {
-    console.log(event.target)
     var availableSquare = currentGame.checkAvailability(event.target.id);
+    console.log("check availability on this board: ", currentGame.board);
     if (availableSquare) {
         playRound(availableSquare);
         displayBoard();
     } else {
         fullSquareAlert();
-        //error handling function
     }
 })
 
 //functions
 
-//function loadPage()
-
 //fired when start game button clicked
 function flipBanner() {
-    console.log("flip banner")
     playButton.classList.add('hidden');
+    fullSquareError.classList.add('hidden');
     for( var i = 0; i < turnPrompts.length; i++) {
         turnPrompts[i].classList.remove('hidden');
     }
@@ -79,12 +75,10 @@ function playRound(position) {
     checkWinner();
 }
 function fullSquareAlert() {
-    console.log("that square is full! pick an empty square")
     fullSquareError.classList.remove('hidden');
 }
 function checkWinner() {
     if(player1.checkForWin(winStates)) {
-        console.log("player 1 wins")
         player1.wins++;
         console.log("Player 1 Wins: ", player1.wins)
         callGame(1);
@@ -93,7 +87,7 @@ function checkWinner() {
         console.log("player 2 wins")
         player2.wins++;
         console.log("Player 2 Wins: ", player2.wins)
-        callGame(2)
+        callGame(2);
         return;
     } else if (currentGame.checkDraw()){
         callGame('draw');
@@ -104,9 +98,6 @@ function checkWinner() {
 }
 function displayBoard() {
     //position = index numner/box id
-    console.log(currentGame.board);
-    console.log("indv boxes: ", boxes);
-    console.log("boxes[0]: ", boxes[0])
     for(var i = 0; i < currentGame.board.length; i++) {
         if(currentGame.board[i] === '*'){
             console.log("Boxes[i]: ", boxes[i]);
@@ -118,8 +109,6 @@ function displayBoard() {
 }
 //when winner declared
 function callGame(winner) {
-    //interpolate HTML in banner
-    //interpolate HTML in sections
     if(winner === 1) {
         winnerDisplay.innerText = '🌞The Day Wins!🌞';
         player1Wins.innerText = `${player1.wins} Wins`;
@@ -131,7 +120,7 @@ function callGame(winner) {
     }
     displayWinner();
     disableGrid();
-    resetGameSection();
+    setTimeout(resetGameSection, 2000);
 }
 function disableGrid() {
     for(var i = 0; i < boxes.length;i++) {
@@ -146,15 +135,28 @@ function displayWinner() {
     }
 }
 function resetGameSection() {
-    //hide winner
-    //hide lets play button
-    //unhide turn
-    //unhide instructions
-    //currentGame.reset()
-    //undisable board
+    winnerDisplay.classList.add('hidden');
+    playButton.classList.add('hidden')
+    fullSquareError.classList.add('hidden');
+    for(var i = 0; i < turnPrompts.length; i++) {
+        turnPrompts[i].classList.remove('hidden');
+    }
+    currentGame.reset();
+    player1.resetPositions();
+    player2.resetPositions();
+    for(var i = 0; i < boxes.length; i++) {
+        boxes[i].innerText = '';
+        boxes[i].disabled = false;
+    }
+    currentGame.switchTurn();
 }
 //wait several seconds and auto-reset game board
     //can an alert pop up with a count down? and when it disappears the board clears on DOM?
+
+
+
+
+
 
 
 
