@@ -18,6 +18,7 @@ var player2;
      //6,7,8]
 
 //querySelectors
+var sunMoonImg = document.querySelector('.sun-moon');
 var playButton = document.getElementById('playButton');
 var turnPrompts = document.querySelectorAll('.turn-prompt');
 var fullSquareError = document.getElementById('fullSquareError');
@@ -34,7 +35,6 @@ var boxes = document.querySelectorAll('.box');
 //eventListeners
 window.addEventListener('load', function () {
     disableGrid();
-    //display welcome banner
 })
 playButton.addEventListener('click', function() {
     startGame();
@@ -43,7 +43,6 @@ playButton.addEventListener('click', function() {
 })
 gameBoard.addEventListener('click', function(event) {
     var availableSquare = currentGame.checkAvailability(event.target.id);
-    console.log("check availability on this board: ", currentGame.board);
     if (availableSquare) {
         playRound(availableSquare);
         displayBoard();
@@ -58,6 +57,7 @@ gameBoard.addEventListener('click', function(event) {
 function flipBanner() {
     playButton.classList.add('hidden');
     fullSquareError.classList.add('hidden');
+    sunMoonImg.classList.add('hidden');
     displayTurn();
 }
 function displayTurn() {
@@ -80,9 +80,9 @@ function displayBoard() {
     for(var i = 0; i < currentGame.board.length; i++) {
         if(currentGame.board[i] === '*'){
             console.log("Boxes[i]: ", boxes[i]);
-            boxes[i].innerText = '🌞';
+            boxes[i].innerHTML = '<img class="game-token" src="./assets/23.svg" alt="Sun Token">';
         }else if (currentGame.board[i] === '!') {
-            boxes[i].innerText = '🌙';
+            boxes[i].innerHTML = '<img class="game-token" src="./assets/8.svg" alt="Moon Token">';
         } 
     }  
 }
