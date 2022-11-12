@@ -22,7 +22,6 @@ button {
 
 }
 .wins-container {
-    background-color: #FFFFFC;
     margin-top: 7vh;
     height: 18vh;
     width: 18vw;
@@ -31,6 +30,7 @@ button {
     justify-content: center;
     align-items: center;
     border-radius: 66px;
+    background-color: #FFFFFC;
 }
 .main-banner {
     width: 95%;
@@ -45,8 +45,8 @@ button {
 }
 .play-button {
     border: none;
-    width: 15vw;
     height: 5vh;
+    width: 15vw;
     border-radius: 20px;
     background-color: #FFFFFC;
 }
@@ -60,20 +60,20 @@ button {
 .game {
     height: 100vh;
     width: 60vw;
-    background-color: #C89F;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    background-color: #C89F;
 }
 .grid {
-    background-color: #B36A5E;
     height: 60vh;
     width: 60%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     grid-gap: 10px;
+    background-color: #B36A5E;
 }
 .box{
     background-color: #EEE2DF;
