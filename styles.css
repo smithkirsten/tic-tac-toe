@@ -7,16 +7,14 @@ button {
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
 }
-
-/* player sections */
 .player-section {
     height: 100vh;
     width: 20vw;
-    background-color: #B45C;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    background-color: #B45C;
 }
 .player-icon {
     margin: 3vh;
@@ -28,14 +26,12 @@ button {
     margin-top: 7vh;
     height: 18vh;
     width: 18vw;
-    border-radius: 66px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 66px;
 }
-
-/* game section */
 .main-banner {
     width: 95%;
     height: 30vh;
@@ -88,7 +84,6 @@ button {
 }
 .disabled {
     cursor: none;
-    /* turn cursor into icon? */
 }
 .hidden {
     display: none;
