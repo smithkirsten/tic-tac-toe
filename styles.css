@@ -82,6 +82,13 @@ button {
 .game-token {
     height: 75px;
 }
+.reset-game-button {
+    border: none;
+    height: 4vh;
+    width: 10vw;
+    border-radius: 20px;
+    background-color: #FFFFFC;
+}
 .disabled {
     cursor: none;
 }

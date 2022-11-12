@@ -15,6 +15,7 @@ var startingPlayer;
 
 var sunMoonImg = document.querySelector('.sun-moon');
 var playButton = document.getElementById('playButton');
+var resetGameButton = document.getElementById('resetGameButton');
 var turnPrompts = document.querySelectorAll('.turn-prompt');
 var fullSquareError = document.getElementById('fullSquareError');
 var winnerDisplay = document.getElementById('winnerDisplay');
@@ -48,6 +49,8 @@ gameBoard.addEventListener('click', function(event) {
         fullSquareAlert();
     }
 })
+resetGameButton.addEventListener('click', resetGame);
+
 function flipBanner() {
     playButton.classList.add('hidden');
     fullSquareError.classList.add('hidden');
@@ -182,4 +185,14 @@ function storeWins() {
 function retrieveWins() {
     player1.wins = localStorage.getItem('sunWins');
     player2.wins = localStorage.getItem('moonWins');
+}
+function resetGame() {
+    resetGameSection();
+    // player1.wins = 0;
+    // player2.wins = 0;
+    hideTurnPrompts();
+    playButton.classList.remove('hidden');
+    sunMoonImg.classList.remove('hidden');
+    displayPlayerWins();
+    localStorage.clear();
 }
