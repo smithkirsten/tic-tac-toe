@@ -19,8 +19,6 @@ class Player {
         for(var i = 0; i < checklist.length; i++) {
             possibleWin = checklist[i];
             if(this.positions.includes(possibleWin[0]) && this.positions.includes(possibleWin[1]) && this.positions.includes(possibleWin[2])) {
-                console.log("Winning player positions: ", this.positions)
-                console.log("Win state: ", possibleWin);
                 return true;
             }
         }

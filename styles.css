@@ -88,7 +88,7 @@ button {
     height: 75px;
 }
 .disabled {
-    cursor: not-allowed;
+    cursor: none;
     /* turn cursor into icon? */
 }
 .hidden {

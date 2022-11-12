@@ -12,10 +12,7 @@ var winStates = [ //pass into checklist
 var currentGame;
 var player1;
 var player2;
-    //board
-    //[0,1,2,
-     //3,4,5,
-     //6,7,8]
+var startingPlayer;
 
 //querySelectors
 var sunMoonImg = document.querySelector('.sun-moon');
@@ -35,6 +32,13 @@ var boxes = document.querySelectorAll('.box');
 //eventListeners
 window.addEventListener('load', function () {
     disableGrid();
+    if(localStorage.length > 0) {
+        startGame();
+        retrieveWins();
+        flipBanner();
+        displayPlayerWins();
+        enableGrid();
+    }
 })
 playButton.addEventListener('click', function() {
     startGame();
@@ -71,10 +75,11 @@ function displayTurn() {
     }
 }
 function startGame() {
-    var startingTurn = Math.floor(Math.random() * 2)
     player1 = new Player('*', 1);
     player2 = new Player('!', 2);
-    currentGame = new Game (player1, player2, startingTurn + 1);
+    startingPlayer = Math.floor(Math.random() * 2) + 1;
+    currentGame = new Game (player1, player2, startingPlayer);
+    console.log("Starting player: ", startingPlayer)
 }
 function displayBoard() {
     for(var i = 0; i < currentGame.board.length; i++) {
@@ -90,6 +95,10 @@ function displayWinner() {
     winnerDisplay.classList.remove('hidden');
     playButton.classList.add('hidden');
     hideTurnPrompts();
+}
+function displayPlayerWins() {
+    player1Wins.innerText = `${player1.wins} Wins`;
+    player2Wins.innerText = `${player2.wins} Wins`;
 }
 function displayTurnPrompts() {
     for(var i = 0; i < turnPrompts.length; i++) {
@@ -134,10 +143,12 @@ function playRound(position) {
 function checkWinner() {
     if(player1.checkForWin(winStates)) {
         player1.wins++;
+        storeWins();
         callGame(1);
         return;
     } else if (player2.checkForWin(winStates)) {
         player2.wins++;
+        storeWins();
         callGame(2);
         return;
     } else if (currentGame.checkDraw()){
@@ -150,15 +161,16 @@ function checkWinner() {
 function callGame(winner) {
     if(winner === 1) {
         winnerDisplay.innerText = '🌞The Day Wins!🌞';
-        player1Wins.innerText = `${player1.wins} Wins`;
+        // player1Wins.innerText = `${player1.wins} Wins`;
     } else if (winner === 2) {
         winnerDisplay.innerText = '🌙The Night Wins!🌙';
-        player2Wins.innerText = `${player2.wins} Wins`;
+        // player2Wins.innerText = `${player2.wins} Wins`;
     } else {
         winnerDisplay.innerText = '🌞It\'s a draw🌙';
     }
-    displayWinner();
     disableGrid();
+    displayWinner();
+    displayPlayerWins(); 
     setTimeout(resetGameSection, 2000);
 }
 function resetGameSection() {
@@ -169,11 +181,29 @@ function resetGameSection() {
     currentGame.reset();
     player1.resetPositions();
     player2.resetPositions();
-    currentGame.switchTurn();
+    if(currentGame.turn === startingPlayer) {
+        console.log("Resetting game: Startng player from this round: ", startingPlayer)
+        console.log("Current Turn: ", currentGame.turn )
+        currentGame.switchTurn();
+        startingPlayer = currentGame.turn;
+        console.log("New starting player: ", startingPlayer)
+        console.log("current player: ", currentGame.turn)
+    }
     clearBoardDisplay();
+    displayTurn();
     enableGrid();
 }
 
+function storeWins() {
+    console.log('save')
+    localStorage.setItem('sunWins', player1.wins);
+    localStorage.setItem('moonWins', player2.wins);
+}
+function retrieveWins() {
+    console.log('retrieve')
+    player1.wins = localStorage.getItem('sunWins');
+    player2.wins = localStorage.getItem('moonWins');
+}
 
 
 
