@@ -7,16 +7,14 @@ button {
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
 }
-
-/* player sections */
 .player-section {
     height: 100vh;
     width: 20vw;
-    background-color: #B45C;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    background-color: #B45C;
 }
 .player-icon {
     margin: 3vh;
@@ -24,19 +22,16 @@ button {
 
 }
 .wins-container {
-    background-color: #FFFFFC;
     margin-top: 7vh;
     height: 18vh;
     width: 18vw;
-    border-radius: 66px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-radius: 66px;
+    background-color: #FFFFFC;
 }
-
-
-/* game section */
 .main-banner {
     width: 95%;
     height: 30vh;
@@ -50,8 +45,8 @@ button {
 }
 .play-button {
     border: none;
-    width: 15vw;
     height: 5vh;
+    width: 15vw;
     border-radius: 20px;
     background-color: #FFFFFC;
 }
@@ -65,20 +60,20 @@ button {
 .game {
     height: 100vh;
     width: 60vw;
-    background-color: #C89F;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    background-color: #C89F;
 }
 .grid {
-    background-color: #B36A5E;
     height: 60vh;
     width: 60%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     grid-gap: 10px;
+    background-color: #B36A5E;
 }
 .box{
     background-color: #EEE2DF;
@@ -88,8 +83,7 @@ button {
     height: 75px;
 }
 .disabled {
-    cursor: not-allowed;
-    /* turn cursor into icon? */
+    cursor: none;
 }
 .hidden {
     display: none;
