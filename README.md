@@ -5,7 +5,6 @@ Is it dawn or is it dusk? In this game, two users can compete to sieze the day o
 Clone this repository to a local machine and open in a code editor. User terminal or other method of opening index.html in a live browser and let the fight between day and night commence!
 
 **Preview of App:**
-<img src="./assets/pageload.png">
 ![Screenshot of page load of game: a tic tac toe board with a pink background and sun and moon icons to represent each player](/assets/pageload.png)
 
 **Context:**
