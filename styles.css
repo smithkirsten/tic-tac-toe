@@ -102,6 +102,9 @@ button {
     background-color: var(--boxes);
     border: none;
 }
+.box:hover {
+    border: solid whitesmoke;
+}
 .game-token {
     height: 75px;
 }
