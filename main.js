@@ -105,12 +105,14 @@ function fullSquareAlert() {
     fullSquareError.classList.remove('hidden');
 }
 function disableGrid() {
+    gameBoard.classList.add('disabled'); 
     for(var i = 0; i < boxes.length;i++) {
         boxes[i].disabled = true;
         boxes[i].classList.add('disabled');
     } 
 }
 function enableGrid() {
+    gameBoard.classList.remove('disabled'); 
     for(var i = 0; i < boxes.length;i++) {
         boxes[i].disabled = false;
         boxes[i].classList.remove('disabled');
@@ -152,10 +154,17 @@ function checkWinner() {
 function callGame(winner) {
     if(winner === 1) {
         winnerDisplay.innerText = '🌞The Day Wins!🌞';
+        document.body.classList.add('day-theme');
+        document.body.classList.remove('night-theme');
+        
     } else if (winner === 2) {
         winnerDisplay.innerText = '🌙The Night Wins!🌙';
+        document.body.classList.add('night-theme');
+        document.body.classList.remove('day-theme');
     } else {
         winnerDisplay.innerText = '🌞It\'s a draw🌙';
+        document.body.classList.remove('day-theme');
+        document.body.classList.remove('night-theme');
     }
     disableGrid();
     displayWinner();
@@ -187,6 +196,8 @@ function retrieveWins() {
     player2.wins = localStorage.getItem('moonWins');
 }
 function resetGame() {
+    document.body.classList.remove('day-theme');
+    document.body.classList.remove('night-theme');
     localStorage.clear();
     clearBoardDisplay();
     disableGrid();
