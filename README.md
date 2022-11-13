@@ -10,8 +10,10 @@ Clone this repository to a local machine and open in a code editor. User termina
 **Context:**
 This is the final project of Module 1 for Turing School of Software Design. We were given one week to complete this solo challenge. I completed the MVP in 4 days and then spent some additional time adding extra elements and features to the game.
 
-Contributors:
-Kirsten Smith: [GitHub](https://github.com/smithkirsten) [LinkedIn](https://www.linkedin.com/in/kirsten-stamm-smith/)
+**Contributors:**
+Kirsten Smith:
+[GitHub](https://github.com/smithkirsten) 
+[LinkedIn](https://www.linkedin.com/in/kirsten-stamm-smith/)
 
 **Learning Goals:**
 * Design a concept and wireframe for a website without a comp
