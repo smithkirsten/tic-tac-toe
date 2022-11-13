@@ -165,7 +165,6 @@ function callGame(winner) {
         winnerDisplay.innerText = '🌞It\'s a draw🌙';
         document.body.classList.remove('day-theme');
         document.body.classList.remove('night-theme');
-        //switch to root mode
     }
     disableGrid();
     displayWinner();

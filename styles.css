@@ -118,6 +118,9 @@ button:hover {
 .disabled {
     cursor: none;
 }
+.disabled:hover{
+    border: none;
+}
 .hidden {
     display: none;
 }
