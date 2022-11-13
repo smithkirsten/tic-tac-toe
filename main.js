@@ -187,12 +187,12 @@ function retrieveWins() {
     player2.wins = localStorage.getItem('moonWins');
 }
 function resetGame() {
-    resetGameSection();
-    // player1.wins = 0;
-    // player2.wins = 0;
+    localStorage.clear();
+    clearBoardDisplay();
+    disableGrid();
+    startGame();
     hideTurnPrompts();
     playButton.classList.remove('hidden');
     sunMoonImg.classList.remove('hidden');
     displayPlayerWins();
-    localStorage.clear();
 }
