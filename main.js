@@ -152,10 +152,18 @@ function checkWinner() {
 function callGame(winner) {
     if(winner === 1) {
         winnerDisplay.innerText = '🌞The Day Wins!🌞';
+        document.body.classList.add('day-theme');
+        document.body.classList.remove('night-theme');
+        
     } else if (winner === 2) {
         winnerDisplay.innerText = '🌙The Night Wins!🌙';
+        document.body.classList.add('night-theme');
+        document.body.classList.remove('day-theme');
     } else {
         winnerDisplay.innerText = '🌞It\'s a draw🌙';
+        document.body.classList.remove('day-theme');
+        document.body.classList.remove('night-theme');
+        //switch to root mode
     }
     disableGrid();
     displayWinner();
@@ -187,6 +195,8 @@ function retrieveWins() {
     player2.wins = localStorage.getItem('moonWins');
 }
 function resetGame() {
+    document.body.classList.remove('day-theme');
+    document.body.classList.remove('night-theme');
     localStorage.clear();
     clearBoardDisplay();
     disableGrid();
