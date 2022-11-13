@@ -1,11 +1,19 @@
 **Abstract:**
-Is it dawn or is it dusk? In this game, two users can compete to sieze the day or take back the night with a brutal battle of tic tac toe. This game will tally the wins of each user and that data will be transferred to local storage, so it persists between reloads of the website. Ready to challenge another opponent? Hit the reset button to clear local storage and start a new game.
+Is it dawn or is it dusk? In this game, two users can compete to sieze the day or take back the night with a brutal battle of tic tac toe. 
+The game will begin with a twilight color theme and the theme will change based on the winner of each round (The sun winning will display a light theme, the moon winning will display a dark theme, and a draw will return the theme to twilight).
+At the end of the round, the game will reset after a pause with an updated win tally for each respective player. The application will tally the wins of each user and that data will be transferred to local storage, so it persists between reloads of the website. Ready to challenge another opponent? Hit the reset button to clear local storage and start a new game with a cleared wins tally.
 
 **Installation Instructions:**
 Clone this repository to a local machine and open in a code editor. User terminal or other method of opening index.html in a live browser and let the fight between day and night commence!
 
 **Preview of App:**
 ![Screenshot of page load of game: a tic tac toe board with a pink background and sun and moon icons to represent each player](/assets/pageload.png)
+Twilight
+![Screenshot of the same game with a yellow background and peach elements](/assets/Daytheme.png)
+Light theme
+![Screenshot of the same game with a dark purple background and lighter elements](/assets/nighttheme.png)
+
+
 
 **Context:**
 This is the final project of Module 1 for Turing School of Software Design. We were given one week to complete this solo challenge. I completed the MVP in 4 days and then spent some additional time adding extra elements and features to the game.
@@ -26,6 +34,7 @@ Kirsten Smith:
 * Error handling
 -Extras:-
 * Use local storage to allow winner tally to persist when the page is reloaded
+* Create a root class and alternate classes in CSS so that the page can change color themes at certain points in the program
 
 **Wins & Challenges:**
 
