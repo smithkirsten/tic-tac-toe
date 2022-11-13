@@ -105,12 +105,14 @@ function fullSquareAlert() {
     fullSquareError.classList.remove('hidden');
 }
 function disableGrid() {
+    gameBoard.classList.add('disabled'); 
     for(var i = 0; i < boxes.length;i++) {
         boxes[i].disabled = true;
         boxes[i].classList.add('disabled');
     } 
 }
 function enableGrid() {
+    gameBoard.classList.remove('disabled'); 
     for(var i = 0; i < boxes.length;i++) {
         boxes[i].disabled = false;
         boxes[i].classList.remove('disabled');
