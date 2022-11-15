@@ -13,9 +13,9 @@ class Game {
     }
     updateBoard(position) {
         if(this.turn === 1) {
-            this.board[position] = '*'; //player1.token
+            this.board[position] = '*'; 
         } else {
-            this.board[position] = '!'; //player2.token
+            this.board[position] = '!'; 
         }
     }
     switchTurn() {
@@ -37,6 +37,5 @@ class Game {
     }
     reset() {
       this.board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-      //randomize which player goes first? 
     }
 }

@@ -1,6 +1,6 @@
 class Player {
     constructor(token, id) {
-        this.id; //randomize number
+        this.id = id;
         this.token = token;
         this.wins = 0;
         this.positions = [];
