@@ -59,7 +59,7 @@ function flipBanner() {
 }
 function displayTurn() {
     if (currentGame.turn === 1) {
-        turnPrompts[0].innerText = 'Mave your move, Sun!'
+        turnPrompts[0].innerText = 'Make your move, Sun!'
     } else {
         turnPrompts[0].innerText = 'Make your move, Moon!'
     }
