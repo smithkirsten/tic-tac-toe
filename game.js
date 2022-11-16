@@ -28,11 +28,9 @@ class Game {
     checkDraw() {
         for(var i = 0; i < this.board.length; i++) {
             if(!isNaN(this.board[i])) {
-                console.log("no winner yet!")
                 return false;
             }
         }
-        console.log("draw!")
         return true;
     }
     reset() {
